@@ -1,4 +1,4 @@
-// netlify/functions/get-stock-list.js (SIMPLIFIED VERSION)
+// netlify/functions/get-stock-list.js (SIMPLIFIED VERSION TO PREVENT TIMEOUT)
 
 const fetch = require('node-fetch');
 
@@ -16,23 +16,20 @@ async function getStockDetails(ticker) {
         const eodhdData = await eodhdResponse.json();
         const highlights = eodhdData.Highlights || {};
         const general = eodhdData.General || {};
-
-        const finnhubProfileUrl = `https://finnhub.io/api/v1/stock/profile2?symbol=${ticker}&token=${FINNHUB_API_KEY}`;
-        const profileRes = await fetch(finnhubProfileUrl);
-        const finnhubProfile = profileRes.ok ? await profileRes.json() : {};
-
+        
+        // 为了提高速度，我们只获取最核心的数据
         const stockData = {
             ticker: ticker,
-            name: general.Name || finnhubProfile.name || ticker,
-            logo: finnhubProfile.logo || `https://eodhd.com${general.LogoURL}` || '',
+            name: general.Name || ticker,
             pe: highlights.PERatio,
             pb: highlights.PBRatio,
             dividendYield: highlights.DividendYield,
-            // --- 行业均值计算被暂时移除以避免超时 ---
-            industryAvgPE: null // 暂时返回null
+            industryAvgPE: null // 行业均值计算已移除，以避免超时
         };
 
+        // 如果连PE都没有，就跳过这只股票
         if (!stockData.pe) {
+            console.warn(`Incomplete PE for ${ticker}. Skipping.`);
             return null;
         }
         
