@@ -1,6 +1,12 @@
 [build]
+  # 运行我们在package.json里定义的build脚本
   command = "npm run build"
+  # 告诉Netlify，我们网站的静态文件在根目录
+  publish = "."
+  # 告诉Netlify，打包好的函数放在哪里
+  functions = "netlify/functions"
 
 [functions]
-  directory = "netlify/functions/"
+  # 这一行现在可以省略，因为上面的配置更明确
+  # directory = "netlify/functions"
   node_bundler = "esbuild"
