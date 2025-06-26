@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>估值温度计 V3.45</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>美股估值温度计 (v9 - 最终版)</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>美股估值温度计</h1>
+            <h2 class="company-name">AAPL (苹果公司)</h2>
+            <p id="timestamp" class="timestamp">数据加载中...</p>
+        </header>
+
+        <main>
+            <!-- 总仪表盘区域 -->
+            <section class="main-gauge-section card">
+                <div class="price-display">
+                    当前股价: <span id="current-price">$---.--</span>
+                </div>
+                <h3 class="main-gauge-title">综合估值风险值</h3>
+                <div id="main-gauge" style="width: 100%; height: 380px;"></div>
+            </section>
+
+            <!-- 摘要与操作区域 -->
+            <section class="summary-section">
+                <div id="summary-container">
+                    <div id="summary-chart" style="height: 25px; width: 100%;"></div>
+                    <p id="summary-text">分析中...</p>
+                </div>
+                <button id="re-analyze-btn" class="re-analyze-button">重新分析</button>
+            </section>
+            
+            <!-- 独立指标区域 -->
+            <div class="metrics-controls">
+                <h3>独立财务指标</h3>
+                <div class="view-toggle">
+                    <button id="view-toggle-gauge" class="toggle-button active">仪表盘</button>
+                    <button id="view-toggle-list" class="toggle-button">列表</button>
+                </div>
+            </div>
+
+            <!-- 越高越好指标组 -->
+            <section class="metric-group-card">
+                <h4>越高越好的指标 (增长与效率)</h4>
+                <div class="metrics-grid" id="higher-is-better-grid"></div>
+                <div class="metrics-list" id="higher-is-better-list" style="display: none;"></div>
+            </section>
+
+            <!-- 越低越好指标组 -->
+            <section class="metric-group-card">
+                <h4>越低越好的指标 (估值与负债)</h4>
+                <div class="metrics-grid" id="lower-is-better-grid"></div>
+                <div class="metrics-list" id="lower-is-better-list" style="display: none;"></div>
+            </section>
+        </main>
+
+        <footer>
+            <p>数据仅供参考，不构成投资建议。</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
